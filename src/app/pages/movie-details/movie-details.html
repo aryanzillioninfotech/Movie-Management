@@ -1,0 +1,15 @@
+@if (movie) {
+  <div class="container mt-4">
+    <h2>{{ movie.title }} ({{ movie.year }})</h2>
+    <div class="row mt-3">
+      <div class="col-md-4">
+        <img [src]="movie.poster" class="img-fluid" alt="{{ movie.title }}" />
+      </div>
+      <div class="col-md-8">
+        <p>{{ movie.description }}</p>
+      </div>
+    </div>
+  </div>
+} @else {
+  <p>Loading...</p>
+}
