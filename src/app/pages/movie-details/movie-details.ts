@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { ChangeDetectorRef, Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { Movie, MovieService } from '../../services/movie';
 import { CommonModule } from '@angular/common';
@@ -15,7 +15,8 @@ export class MovieDetailsComponent implements OnInit {
 
   constructor(
     private route: ActivatedRoute,
-    private movieService: MovieService
+    private movieService: MovieService,
+    private cdr: ChangeDetectorRef,
   ) {}
 
   ngOnInit(): void {
@@ -27,6 +28,7 @@ export class MovieDetailsComponent implements OnInit {
         next: (data) => {
           console.log('Movie details received:', data);
           this.movie = data;
+          this.cdr.detectChanges();
         },
         error: (err) => {
           console.error('Error fetching details:', err);

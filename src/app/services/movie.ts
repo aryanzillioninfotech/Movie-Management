@@ -18,17 +18,15 @@ export class MovieService {
   constructor(private http: HttpClient) {}
 
   searchMovies(query: string): Observable<Movie[]> {
-    const url = `${this.baseUrl}?apikey=${this.apiKey}&s=${encodeURIComponent(query)}`;
-    return this.http.get<any>(url).pipe(
-      map(response => {
-        if (response.Response === 'True') {
-          return response.Search.map((item: any) => this.mapToMovie(item));
-        } else {
-          return [];
-        }
-      })
-    );
-  }
+  const url = `${this.baseUrl}?apikey=${this.apiKey}&s=${encodeURIComponent(query)}`;
+  return this.http.get<any>(url).pipe(
+    map(res => res.Response === 'True'
+      ? res.Search.map((item: any) => this.mapToMovie(item))
+      : []
+    )
+  );
+}
+
 
 
   getMovieById(id: string): Observable<Movie> {
