@@ -1,16 +1,15 @@
-import { bootstrapApplication } from '@angular/platform-browser';
-import { provideRouter } from '@angular/router';
 import { importProvidersFrom } from '@angular/core';
-import { HttpClientModule, provideHttpClient } from '@angular/common/http';
-
-// import { AppComponent } from './app/app.component';
-import { routes } from './app/app.routes';
 import { App } from './app/app';
+import { provideRouter } from '@angular/router';
+import { routes } from './app/app.routes';
+import { provideHttpClient } from '@angular/common/http';
+import { FormsModule } from '@angular/forms';
+import { bootstrapApplication } from '@angular/platform-browser';
 
 bootstrapApplication(App, {
   providers: [
-    provideHttpClient(),
     provideRouter(routes),
-    importProvidersFrom(HttpClientModule)  
+    provideHttpClient(),
+    importProvidersFrom(FormsModule)  // 🔥 THIS IS THE IMPORTANT LINE
   ]
 });
